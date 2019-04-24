@@ -35,6 +35,7 @@ fs.writeFile('file-3-text.txt', data, function(err){
 
 // 写入二进制
 var datab = Buffer.from(data, 'utf-8');
+// datab = new Buffer(data, 'utf-8'); // also works
 fs.writeFile('file-3-buffer.txt', datab, function(err){
     if(err) {
         console.log('error happend');
