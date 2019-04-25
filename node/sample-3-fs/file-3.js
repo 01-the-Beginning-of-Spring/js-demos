@@ -6,21 +6,25 @@ process.chdir('./sample-3-fs');
 
 
 // 在退出时清理生成临时文件
+
+var files = [
+    'file-3-text.txt', 'file-3-buffer.txt', 'file-3-text-sync.txt'
+];
+
 var CLEAR_FLAG = true; //true 清理，false 不清理
 if(CLEAR_FLAG) {
-    process.on('exit', function(code){
-        if(code == 0) {
-            var files = [
-                'file-3-text.txt', 'file-3-buffer.txt', 'file-3-text-sync.txt'
-            ];
-            for(var i = 0; i<files.length; i++) {
-                fs.unlinkSync(files[i]);
-                console.log('file "' + files[i] + '" is deleted.');
-            }
-        } else {
-            console.log('exit code ='+code + ', there may be an error.');
-        }
-    })
+    // process.on('exit', function(code){
+    //     if(code == 0) {
+    //         for(var i = 0; i<files.length; i++) {
+    //             fs.unlinkSync(files[i]);
+    //             console.log('file "' + files[i] + '" is deleted.');
+    //         }
+    //     } else {
+    //         console.log('exit code ='+code + ', there may be an error.');
+    //     }
+    // })
+    var utils = require('../util/utils');
+    utils.deleteOnExit(files);
 }
 
 //写入文本，默认按照 utf-8 编码
